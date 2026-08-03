@@ -1,0 +1,503 @@
+/* ============================================
+   Hub Premium UI — Enhanced Utilities
+   ============================================ */
+
+/* ============================================
+   Typography — font-display:swap for all fonts
+   ============================================ */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7W0I5nvwU.woff2)
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/fraunces/v31/6NUh8FyLNQOQjAnK8vwlCNae/P5P0mYp0rcfnA4tXjC3R4AoyNQ.woff2)
+    format("woff2");
+  font-variation-settings:
+    "SOFT" 0,
+    "WONK" 0,
+    "opsz" 9;
+}
+
+/* ============================================
+   CSS Custom Properties — Light (default)
+   ============================================ */
+:root {
+  /* Font families */
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces Variable", "Fraunces", Georgia, serif;
+
+  /* Background colors */
+  --bg-primary: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-surface: #f3f4f6;
+  --bg-noise: 0.03;
+
+  /* Text colors */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* Border colors */
+  --border-default: #e5e7eb;
+  --border-card: #e5e7eb;
+
+  /* Shadow colors */
+  --shadow-card: rgba(0, 0, 0, 0.04);
+  --shadow-hover: rgba(0, 0, 0, 0.08);
+
+  /* Orb gradient colors */
+  --orb-violet: rgba(124, 58, 237, 0.1);
+  --orb-gold: rgba(184, 135, 74, 0.08);
+  --orb-pink: rgba(236, 72, 153, 0.06);
+  --orb-indigo: rgba(99, 102, 241, 0.08);
+  --orb-center: rgba(124, 58, 237, 0.04);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
+
+  /* Selection */
+  --selection-bg: rgba(124, 58, 237, 0.18);
+  --selection-text: #1f2937;
+
+  /* Focus ring */
+  --focus-ring: rgba(124, 58, 237, 0.5);
+
+  /* Grid pattern */
+  --grid-color: rgba(0, 0, 0, 0.04);
+
+  /* Skeleton */
+  --skeleton-from: #e5e7eb;
+  --skeleton-via: #f3f4f6;
+  --skeleton-to: #e5e7eb;
+
+  /* Theme transition */
+  --theme-transition: 0.25s ease;
+}
+
+/* ============================================
+   CSS Custom Properties — Dark
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0f1117;
+    --bg-card: #1a1d27;
+    --bg-surface: #232732;
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --border-default: #2d3140;
+    --border-card: #2d3140;
+
+    --shadow-card: rgba(0, 0, 0, 0.2);
+    --shadow-hover: rgba(0, 0, 0, 0.3);
+
+    --orb-violet: rgba(124, 58, 237, 0.18);
+    --orb-gold: rgba(216, 180, 100, 0.12);
+    --orb-pink: rgba(236, 72, 153, 0.1);
+    --orb-indigo: rgba(99, 102, 241, 0.12);
+    --orb-center: rgba(124, 58, 237, 0.08);
+
+    --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
+
+    --selection-bg: rgba(124, 58, 237, 0.35);
+    --selection-text: #e2e8f0;
+
+    --focus-ring: rgba(139, 92, 246, 0.6);
+
+    --grid-color: rgba(255, 255, 255, 0.04);
+
+    --skeleton-from: #2d3140;
+    --skeleton-via: #3b3f50;
+    --skeleton-to: #2d3140;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base body — use CSS vars for smooth theme switching */
+body {
+  font-family: var(--font-sans);
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
+}
+
+/* ============================================
+   Typography utilities — make fonts come alive
+   ============================================ */
+
+/* Variable font weight oscillation for Fraunces (serif with SOFT & WONK axes) */
+@keyframes weightPulse {
+  0%,
+  100% {
+    font-variation-settings:
+      "wght" 400,
+      "SOFT" 50,
+      "WONK" 0.5,
+      "opsz" 36;
+  }
+  25% {
+    font-variation-settings:
+      "wght" 700,
+      "SOFT" 100,
+      "WONK" 1,
+      "opsz" 48;
+  }
+  50% {
+    font-variation-settings:
+      "wght" 500,
+      "SOFT" 60,
+      "WONK" 0.6,
+      "opsz" 36;
+  }
+  75% {
+    font-variation-settings:
+      "wght" 600,
+      "SOFT" 80,
+      "WONK" 0.8,
+      "opsz" 42;
+  }
+}
+
+/* Variable font weight oscillation for Inter (sans-serif) */
+@keyframes weightPulseInter {
+  0%,
+  100% {
+    font-variation-settings: "wght" 400;
+  }
+  25% {
+    font-variation-settings: "wght" 700;
+  }
+  50% {
+    font-variation-settings: "wght" 500;
+  }
+  75% {
+    font-variation-settings: "wght" 600;
+  }
+}
+
+/* Shimmering gradient text animation */
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Letter spacing breathe */
+@keyframes letterSpacingBreathe {
+  0%,
+  100% {
+    letter-spacing: 0.02em;
+  }
+  50% {
+    letter-spacing: 0.06em;
+  }
+}
+
+/* Fraunces variable font utility */
+.font-serif-variable {
+  font-family: var(--font-serif);
+  font-variation-settings:
+    "SOFT" 50,
+    "WONK" 0.5,
+    "opsz" 36;
+  font-weight: 500;
+  transition: font-variation-settings 0.4s ease;
+}
+
+.font-serif-variable:hover {
+  font-variation-settings:
+    "SOFT" 100,
+    "WONK" 1,
+    "opsz" 48;
+  font-weight: 700;
+}
+
+/* Text weight pulse animation */
+.animate-weight-pulse {
+  animation: weightPulse 4s ease-in-out infinite;
+}
+
+.animate-weight-pulse-inter {
+  animation: weightPulseInter 4s ease-in-out infinite;
+}
+
+/* Text shimmer animation on gradient */
+.animate-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 25%,
+    var(--text-primary) 50%,
+    var(--text-secondary) 75%,
+    var(--text-primary) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s ease-in-out infinite;
+}
+
+/* Letter spacing breathe */
+.animate-letter-spacing {
+  animation: letterSpacingBreathe 3s ease-in-out infinite;
+}
+
+/* Hover letter-spacing expansion */
+.hover-expand-spacing {
+  transition: letter-spacing 0.3s ease;
+}
+
+.hover-expand-spacing:hover {
+  letter-spacing: 0.04em;
+}
+
+/* Gradient text with continuous live animation (violet + gold) */
+.text-gradient-live {
+  background: linear-gradient(
+    270deg,
+    #8b5cf6,
+    #7c3aed,
+    #b8874a,
+    #d9a968,
+    #8b5cf6
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 6s ease-in-out infinite;
+}
+
+/* Subtle opacity/text-shadow glow pulse */
+@keyframes textGlowPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    text-shadow: 0 0 0px transparent;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(124, 58, 237, 0.15);
+  }
+}
+
+.animate-text-glow {
+  animation: textGlowPulse 3s ease-in-out infinite;
+}
+
+/* Smooth font-weight transition on hover for any text */
+.smooth-weight {
+  transition:
+    font-weight 0.3s ease,
+    font-variation-settings 0.3s ease;
+}
+
+/* ============================================
+   Glassmorphism utilities
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(26, 29, 39, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .glass-strong {
+    background: rgba(26, 29, 39, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ============================================
+   Glow effects
+   ============================================ */
+.glow-violet {
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.1),
+    0 0 40px rgba(124, 58, 237, 0.03);
+}
+
+.glow-gold {
+  box-shadow:
+    0 0 20px rgba(184, 135, 74, 0.1),
+    0 0 40px rgba(184, 135, 74, 0.03);
+}
+
+.glow-violet-strong {
+  box-shadow:
+    0 0 30px rgba(124, 58, 237, 0.2),
+    0 0 60px rgba(124, 58, 237, 0.06);
+}
+
+/* ============================================
+   Gradient text
+   ============================================ */
+.text-gradient {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed, #6d28d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #d9a968, #b8874a, #8c6530);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Background textures — theme-aware
+   ============================================ */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ============================================
+   3D tilt helpers
+   ============================================ */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.card-tilt {
+  transition: all 0.3s ease;
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* ============================================
+   Focus-visible accessibility ring
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Accessibility — respect reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Subtle transition helper
+   ============================================ */
+.transition-element {
+  transition: all 0.2s ease;
+}
+
+.theme-transition {
+  transition:
+    background-color var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition),
+    color var(--theme-transition);
+}
+
+/* ============================================
+   Custom scrollbar — theme-aware
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ============================================
+   Skeleton loading — theme-aware
+   ============================================ */
+.skeleton-pulse {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-from) 0%,
+    var(--skeleton-via) 50%,
+    var(--skeleton-to) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
